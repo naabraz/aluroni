@@ -19,5 +19,5 @@ export default function Buscador({ busca, setBusca }: Props) {
         color='#4C4D5E'
       />
     </div>
-  )
+  );
 }

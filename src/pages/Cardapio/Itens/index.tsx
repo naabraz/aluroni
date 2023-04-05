@@ -31,27 +31,27 @@ export default function Itens(props: Props) {
     propriedade: keyof Pick<typeof cardapio[0], 'size' | 'serving' | 'price'>
   ) {
     return lista.sort((a, b) => (a[propriedade] > b[propriedade] ? 1 : -1));
-  };
+  }
 
 
   function ordenar(novaLista: typeof cardapio) {
     switch(ordenador) {
-      case 'porcao':
-        return ordenarPropriedadeCrescente(novaLista, 'size');
-      case 'qtd_pessoas':
-        return ordenarPropriedadeCrescente(novaLista, 'serving');
-      case 'preco':
-        return ordenarPropriedadeCrescente(novaLista, 'price');
-      default:
-        return novaLista;
+    case 'porcao':
+      return ordenarPropriedadeCrescente(novaLista, 'size');
+    case 'qtd_pessoas':
+      return ordenarPropriedadeCrescente(novaLista, 'serving');
+    case 'preco':
+      return ordenarPropriedadeCrescente(novaLista, 'price');
+    default:
+      return novaLista;
     }
   }
 
   useEffect(() => {
     const novaLista = cardapio.filter(item =>
       testaBusca(item.title) && testaFiltro(item.category.id));
-      setLista(ordenar(novaLista));
-  }, [busca, filtro, ordenador])
+    setLista(ordenar(novaLista));
+  }, [busca, filtro, ordenador]);
 
   return (
     <div className={styles.itens}>
@@ -59,5 +59,5 @@ export default function Itens(props: Props) {
         <Item key={item.id} {...item} />
       ))}
     </div>
-  )
+  );
 }
