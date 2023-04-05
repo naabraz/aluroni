@@ -4,6 +4,7 @@ import 'normalize.css';
 
 import './index.css';
 import Cardapio from './pages/Cardapio';
+import Inicio from 'pages/Inicio';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -11,6 +12,6 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <Cardapio />
+    <Inicio />
   </React.StrictMode>
 );
