@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import cardapio from 'data/cardapio.json';
 import Item from './Item';
 import styles from './Itens.module.scss';
+import { Cardapio, Prato } from 'types/Prato';
 
 interface Props {
   busca: string;
@@ -26,16 +27,15 @@ export default function Itens(props: Props) {
     return true;
   }
 
-  function ordenarPropriedadeCrescente (
-    lista: typeof cardapio,
-    propriedade: keyof Pick<typeof cardapio[0], 'size' | 'serving' | 'price'>
+  function ordenarPropriedadeCrescente(
+    lista: Cardapio,
+    propriedade: keyof Pick<Prato, 'size' | 'serving' | 'price'>
   ) {
     return lista.sort((a, b) => (a[propriedade] > b[propriedade] ? 1 : -1));
   }
 
-
-  function ordenar(novaLista: typeof cardapio) {
-    switch(ordenador) {
+  function ordenar(novaLista: Cardapio) {
+    switch (ordenador) {
     case 'porcao':
       return ordenarPropriedadeCrescente(novaLista, 'size');
     case 'qtd_pessoas':
@@ -48,8 +48,9 @@ export default function Itens(props: Props) {
   }
 
   useEffect(() => {
-    const novaLista = cardapio.filter(item =>
-      testaBusca(item.title) && testaFiltro(item.category.id));
+    const novaLista = cardapio.filter(
+      (item) => testaBusca(item.title) && testaFiltro(item.category.id)
+    );
     setLista(ordenar(novaLista));
   }, [busca, filtro, ordenador]);
 
